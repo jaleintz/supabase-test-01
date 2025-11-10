@@ -35,9 +35,6 @@ export async function POST(request: Request) {
 
     urls.push(newEntry);
 
-    // Write back to file
-    await fs.writeFile(dataFilePath, JSON.stringify(urls, null, 2), 'utf-8');
-
     return NextResponse.json({ success: true, data: newEntry });
   } catch (error) {
     console.error('Error adding URL:', error);
