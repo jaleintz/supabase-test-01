@@ -35,9 +35,37 @@ export async function POST(request: Request) {
 
     urls.push(newEntry);
 
+    // Write back to file
+    await fs.writeFile(dataFilePath, JSON.stringify(urls, null, 2), 'utf-8');
+
     return NextResponse.json({ success: true, data: newEntry });
   } catch (error) {
     console.error('Error adding URL:', error);
     return NextResponse.json({ error: 'Failed to add URL' }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const { url } = await request.json();
+
+    if (!url) {
+      return NextResponse.json({ error: 'URL is required' }, { status: 400 });
+    }
+
+    // Read existing URLs
+    const fileContent = await fs.readFile(dataFilePath, 'utf-8');
+    const urls = JSON.parse(fileContent);
+
+    // Filter out the URL to delete
+    const updatedUrls = urls.filter((entry: { url: string }) => entry.url !== url);
+
+    // Write back to file
+    await fs.writeFile(dataFilePath, JSON.stringify(updatedUrls, null, 2), 'utf-8');
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting URL:', error);
+    return NextResponse.json({ error: 'Failed to delete URL' }, { status: 500 });
   }
 }

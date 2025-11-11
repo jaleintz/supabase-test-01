@@ -42,13 +42,13 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-900">
-      <main className="flex flex-col items-center gap-8 p-8">
-        <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
-          URL Manager
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 py-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50 mb-6 text-center">
+          Add URL
         </h1>
 
-        <div className="flex flex-col gap-4 w-full max-w-md">
+        <div className="flex flex-col gap-4 w-full max-w-md mx-auto">
           <div className="flex gap-3">
             <input
               type="text"
